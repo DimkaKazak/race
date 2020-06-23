@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="wheel_mapper">
+
+    <select id="getById" resultMap="wheel_map">
+        SELECT *
+        FROM race.wheel as wheel
+        WHERE wheel.idWheel = #{id}
+    </select>
+
+    <select id="getAll" resultMap="wheel_map">
+        SELECT * FROM race.wheel
+    </select>
+
+    <select id="getWheelsToCar" resultMap="wheel_map">
+        SELECT * FROM race.wheel
+        WHERE idCar = #{idCar}
+    </select>
+
+    <update id="update">
+        UPDATE race.wheel SET
+        friction = #{friction}
+        WHERE idWheel = #{id}
+    </update>
+
+    <delete id="deleteById">
+        DELETE FROM race.wheel
+        WHERE idWheel = #{id}
+    </delete>
+
+    <insert id="create">
+        INSERT INTO race.Wheel (idWheel, friction, idCar)
+        VALUES (#{id}, #{name}, #{password})
+    </insert>
+
+    <resultMap id="wheel_map" type="race.models.components.Wheel" autoMapping="false">
+        <id property="id" column="idClient" />
+        <id property="idCar" column="idCar" />
+        <result property="friction" column="friction"/>
+    </resultMap>
+</mapper>
